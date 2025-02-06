@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Hubs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #2b2b2b, #121212);
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7bff8d;
+        }
+
+        #os-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .os-card {
+            background: linear-gradient(145deg, #1f1f1f, #2b2b2b);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            margin: 15px;
+            padding: 25px;
+            padding-bottom: 15px;
+            width: 320px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+            color: #f0f0f0;
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }
+
+        .os-card:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .button {
+            --color: #00A97F;
+            padding: 0.8em 1.7em;
+            background-color: transparent;
+            border-radius: .3em;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: .5s;
+            font-weight: 400;
+            font-size: 17px;
+            border: 1px solid;
+            font-family: inherit;
+            text-transform: uppercase;
+            color: var(--color);
+            z-index: 1;
+        }
+
+        .button::before, .button::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 50px;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+            background-color: var(--color);
+            transition: 1s ease;
+        }
+
+        .button::before {
+            top: -1em;
+            left: -1em;
+        }
+
+        .button::after {
+            left: calc(100% + 1em);
+            top: calc(100% + 1em);
+        }
+
+        .button:hover::before, .button:hover::after {
+            height: 410px;
+            width: 410px;
+        }
+
+        .button:hover {
+            color: rgb(10, 25, 30);
+        }
+
+        .button:active {
+            filter: brightness(.8);
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>OS Hubs</h1>
+
+<div id="os-container"></div>
+
+<script>
+    const osHubs = [
+    {
+                "name": "Ubuntu",
+                "version": "20.04 LTS",
+                "description": "Ubuntu is a popular open-source operating system.",
+                "downloadLink": "https://archive.org/download/ubuntu-unity-20.04-lts/ubuntu-unity-20.04.1-desktop-amd64.iso",
+                "category": "Linux",
+                "obsolete": false,
+                "image": "https://thumbs.dreamstime.com/b/no-preview-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-97109174.jpg"
+            },
+            {
+                "name": "Lubuntu",
+                "version": "20.10",
+                "description": "Lubuntu is a Linux distribution with libre office installed inside. ",
+                "downloadLink": "https://archive.org/download/lubuntu-20.10-desktop-amd64/lubuntu-20.10-desktop-amd64.iso",
+                "category": "Linux",
+                "obsolete": false,
+                "image": "https://thumbs.dreamstime.com/b/no-preview-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-97109174.jpg"
+            },
+            {
+                "name": "Fedora",
+                "version": "34",
+                "description": "Fedora is a Linux distribution developed by the community-supported Fedora Project.",
+                "downloadLink": "https://archive.org/download/fedora-workstation-live-x-86-64-rawhide-20230202.n.-0/Fedora-Workstation-Live-x86_64-Rawhide-20230202.n.0.iso",
+                "category": "Linux",
+                "obsolete": false,
+                "image": "https://thumbs.dreamstime.com/b/no-preview-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-97109174.jpg"
+            },
+            {
+                "name": "Zorin OS",
+                "version": "15.3 Core",
+                "description": "Zorin OS is a user-friendly Linux distribution based on Ubuntu.",
+                "downloadLink": "https://archive.org/download/zorin-os-15.3-core-64-bit/Zorin-OS-15.3-Core-64-bit.iso",
+                "category": "Linux",
+                "obsolete": false,
+                "image": "https://thumbs.dreamstime.com/b/no-preview-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-97109174.jpg"
+            },
+            {
+                "name": "Ester OS",
+                "version": "23",
+                "description": "Ester OS is a lightweight Linux distribution designed for efficiency.",
+                "downloadLink": "https://drive.google.com/uc?id=1hOm9ExfbW3wnCZKlX_jm4ucnfVXJNGi_&export=download&authuser=0&confirm=t&uuid=b8410a95-f4be-4a31-9372-8ce328694175&at=APZUnTW9e0PQbBtREOFR6pO0cyWz%3A1706647698537",
+                "category": "Linux",
+                "obsolete": true,
+                "image": "https://thumbs.dreamstime.com/b/no-preview-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-97109174.jpg"
+            },
+            {
+                "name": "Ester OS",
+                "version": "25",
+                "description": "Ester OS 25 brings more features and improvements.",
+                "downloadLink": "https://archive.org/download/esterOS-25-archive/esterOS-25-Canary-1.iso",
+                "category": "Linux",
+                "obsolete": false,
+                "image": "https://thumbs.dreamstime.com/b/no-preview-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-97109174.jpg"
+            },
+            {
+                "name": "Windows 10",
+                "version": "21H1",
+                "description": "Windows 10 is a series of operating systems produced by Microsoft.",
+                "downloadLink": "https://archive.org/download/windows10iso_202301/Win10_22H2_English_x64.iso",
+                "category": "Windows",
+                "obsolete": false,
+                "image": "https://blog.odosta.com/wp-content/uploads/2018/12/win-10iso.png"
+            },
+            {
+                "name": "Windows 11",
+                "version": "21H1",
+                "description": "Windows 11 is a series of operating systems produced by Microsoft.",
+                "downloadLink": "https://archive.org/download/windows-11_20210626/windows%2011.iso",
+                "category": "Windows",
+                "obsolete": false,
+                "image": "https://i1.wp.com/thewincentral.com/wp-content/uploads/2021/06/Windows-11-traditional-start-screen.jpg?fit=1920%2C1080&ssl=1"
+            },
+            {
+                "name": "macOS",
+                "version": "10.14 Mojave",
+                "description": "macOS Mojave is the fifteenth major release of macOS.",
+                "downloadLink": "https://archive.org/download/MacOSMojave10.14BySYSNETTECHSolutionsFullVersion/macOS%20Mojave%2010.14%20by%20SYSNETTECH%20Solutions%20Full%20Version.iso",
+                "category": "macOS",
+                "obsolete": true,
+                "image": "https://fossbytes.com/wp-content/uploads/2018/06/macos-mojave-dark-mode.jpg"
+            },
+            {
+                "name": "macOS",
+                "version": "10.15 Catalina",
+                "description": "macOS Catalina is the sixteenth major release of macOS.",
+                "downloadLink": "https://archive.org/download/mac-os-catalina-iso-10.15.7/MacOS%20Catalina%20ISO%2010.15.7.iso",
+                "category": "macOS",
+                "obsolete": true,
+                "image": "https://thumbs.dreamstime.com/b/no-preview-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-97109174.jpg"
+            },
+            {
+                "name": "macOS",
+                "version": "11.0 Big Sur",
+                "description": "macOS Big Sur is the seventeenth major release of macOS.",
+                "downloadLink": "https://archive.org/download/mac-os-big-sur-11.0.1-20-b-29_202204/macOS%20Big%20Sur%2011.0.1%20%2820B29%29.iso",
+                "category": "macOS",
+                "obsolete": false,
+                "image": "https://tse2.mm.bing.net/th?id=OIP.eZ9f7TuHIsMoKPPdNh_MtQHaEo&pid=Api&P=0&h=180"
+            },
+            {
+                "name": "macOS",
+                "version": "12.0 Monterey",
+                "description": "macOS Monterey is the eighteenth major release of macOS.",
+                "downloadLink": "https://archive.org/download/macosventura/Ventura.iso",
+                "category": "macOS",
+                "obsolete": false,
+                "image": "https://512pixels.net/wp-content/uploads/2021/10/Monterey-About-This-Mac-scaled.jpg"
+            },
+            {
+                "name": "macOS",
+                "version": "Sequoia",
+                "description": "macOS Sequoia focuses on performance improvements and new features.",
+                "downloadLink": "https://archive.org/download/macos-sequoia-dev1/macOS_24A5264n.iso",
+                "category": "macOS",
+                "obsolete": false,
+                "image": "https://upload.wikimedia.org/wikipedia/en/7/7b/Screenshot_of_macOS_Sequoia.png"
+            },
+            {
+                "name": "macOS",
+                "version": "Sonoma",
+                "description": "macOS Sonoma introduces new features and improvements.",
+                "downloadLink": "https://dn790003.ca.archive.org/0/items/macos-ventura-and-sonoma/MacOS%20Sonoma.iso",
+                "category": "macOS",
+                "obsolete": false,
+                "image": "https://eshop.macsales.com/blog/wp-content/uploads/2023/06/macOS-sonoma-hero.png"
+            },
+            {
+                "name": "Windows Tiny 11",
+                "version": "23H2",
+                "description": "Windows Tiny 11 is a lightweight version of Windows 11.",
+                "downloadLink": "https://archive.org/download/tiny-11-b-1_202309/tiny11%2023H2%20x64.iso",
+                "category": "Windows",
+                "obsolete": false,
+                "image": "https://www.uubyte.com/blog/wp-content/uploads/2023/02/tiny11.jpeg?v=1675756586"
+             },
+             {
+                "name": "Android",
+                "version": "11 x86",
+                "description": "Android 11 for x86 architecture.",
+                "downloadLink": "https://archive.org/download/android-x-86-11-r-arm-x86-64-iso/Android-x86%2011-R%202022-05-04%20%28x86_64%29%20K5.4.40-M21-arm-noGapps-by-Xigo.iso",
+                "category": "Android",
+                "obsolete": false,
+                "image": "https://archive.org/download/android-x-86-11-r-arm-x86-64-iso/Android-11-RVC_01.png"
+             }
+        // Add more OS entries as needed...
+    ];
+
+    const osContainer = document.getElementById("os-container");
+
+    osHubs.forEach(os => {
+        const osCard = document.createElement("div");
+        osCard.classList.add("os-card");
+
+        osCard.innerHTML = `
+            <h2>${os.name} ${os.version}</h2>
+            <p>${os.description}</p>
+            <div class="button-container">
+                <a href="${os.downloadLink}" class="button" target="_blank">Download</a>
+            </div>
+        `;
+
+        osContainer.appendChild(osCard);
+    });
+</script>
+
+</body>
+</html>
